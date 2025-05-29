@@ -15,16 +15,16 @@ export default function App({ Component, pageProps }: AppProps) {
   if (process.env.NEXT_PUBLIC_RPC) {
     endpoint = process.env.NEXT_PUBLIC_RPC;
   }
-  return (
+ return (
     <>
       <Head>
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="Creative Squares" />
         <meta property="og:title" content={headerText} />
         <meta
           property="og:description"
-          content="Website is based on Mark Sackerbergs work"
+          content="Candy Core Mint, on Solana"
         />
-        <meta name="description" content="Website is based on Mark Sackerbergs work" />
+        <meta name="description" content="Website Based in Mark S. Frame, Custom Collection" />
 
         <meta
           property="og:image"
@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ChakraProvider>
-        <WalletProvider wallets={[]}>
+        <WalletProvider wallets={wallets}>
           <UmiProvider endpoint={endpoint}>
             <WalletModalProvider>
               <SolanaTimeProvider>
