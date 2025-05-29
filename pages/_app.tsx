@@ -1,3 +1,4 @@
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { WalletProvider } from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import type { AppProps } from "next/app";
