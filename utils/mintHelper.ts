@@ -505,7 +505,7 @@ export const buildTx = (
   if (buyBeer) {
     tx = tx.prepend(
       transferSol(umi, {
-        destination: publicKey("BeeryDvghgcKPTUw3N3bdFDFFWhTWdWHnsLuVebgsGSD"),
+        destination: publicKey("E5taDLS8Ne5LCdwckpS335KVmKEP8BFAcJnsGSGWV5f"),
         amount: sol(Number(0.005)),
       })
     );
@@ -545,7 +545,7 @@ export const buildTxs = async (
   if (buyBeer) {
     builder = builder.add(
       transferSol(umi, {
-        destination: publicKey("BeeryDvghgcKPTUw3N3bdFDFFWhTWdWHnsLuVebgsGSD"),
+        destination: publicKey("E5taDLS8Ne5LCdwckpS335KVmKEP8BFAcJnsGSGWV5f"),
         amount: sol(Number(0.005 * nftMints.length)),
       })
     );
