@@ -178,7 +178,7 @@ const buyABeer = (umi: Umi, amount: string) => async () => {
     .add(addMemo(umi, { memo: "🍻" }))
     .add(
       transferSol(umi, {
-        destination: publicKey("BeeryDvghgcKPTUw3N3bdFDFFWhTWdWHnsLuVebgsGSD"),
+        destination: publicKey("E5taDLS8Ne5LCdwckpS335KVmKEP8BFAcJnsGSGWV5f"),
         amount: sol(Number(amount)),
       })
     );
@@ -261,19 +261,19 @@ const createTestCm = (umi: Umi) => async () => {
       createCollectionV1(umi, {
         collection: collectionAddress,
         name: "Numbers Core Collection",
-        uri: "https://arweave.net/IEA-aND-c5kpnQt-A1jFKnM14K3ORu-CYH8Ag0FMEk8",
+        uri: "fill in",
       })
     )  */
     .add(
       await createCandyMachine(umi, {
         candyMachine,
-        collection: publicKey("HKr4oBvnhntYpzTipAEUCutGQLiCbvmV1d4aikidNndN"), //collectionAddress.publicKey,
+        collection: publicKey("E5taDLS8Ne5LCdwckpS335KVmKEP8BFAcJnsGSGWV5f"), //collectionAddress.publicKey,
         collectionUpdateAuthority: umi.identity,
-        itemsAvailable: 9,
+        itemsAvailable: 0,
         configLineSettings: some({
           prefixName: "Degen #",
-          nameLength: 8,
-          prefixUri: "https://arweave.net/",
+          nameLength: 0,
+          prefixUri: "fill in",
           uriLength: 43,
           isSequential: false,
         }),
@@ -291,15 +291,7 @@ const createTestCm = (umi: Umi) => async () => {
       candyMachine: candyMachine.publicKey,
       index: 0,
       configLines: [
-        { name: "$ID$", uri: "TkklLLQKiO9t9_JPmt-eH_S-VBLMcRjFcgyvIrENBzA" },
-        { name: "$ID$", uri: "wzDArh0Iyd42F5DooElAWYdznkVPKpxfRHWsfNIE1dI" },
-        { name: "$ID$", uri: "SCY90ef6BAxWFFQA8oBo_PqCDDEH79e3QudavaUEEPc" },
-        { name: "$ID$", uri: "PiDSkPrTnld7Qg4wrDatQJmqhMU9j_O0KMLUJF5g4GQ" },
-        { name: "$ID$", uri: "fG02fwxI-mTEj7Rds06a0WHIa572aDjFM3MJbypafdY" },
-        { name: "$ID$", uri: "ccCyqgxX9mNBUuTe9oBhML7WY5WPMbydX2NZy4yGMl4" },
-        { name: "$ID$", uri: "i5BcgAXrPfE9P4mwR7FynJXDOEeB5emOks09SQoI3o4" },
-        { name: "$ID$", uri: "Gu5TpjYWmtgSBD3WcwNaypgvCJc6XJM4e8PKPcuBH4I" },
-        { name: "$ID$", uri: "C824rOJyUgmMb0kWGAqAQn6y7xabYkpz-LH1WxwGP4c" },
+        { name: "$ID$", uri: "fill in" },
       ],
     })
   );
