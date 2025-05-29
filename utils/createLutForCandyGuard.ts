@@ -175,7 +175,7 @@ export const getLutAddressesForCandyMachineAndGuard = async (
     getSplTokenProgramId(umi),
     getSplAssociatedTokenProgramId(umi),
     ...guardKeys,
-    publicKey("BeeryDvghgcKPTUw3N3bdFDFFWhTWdWHnsLuVebgsGSD"),
+    publicKey("E5taDLS8Ne5LCdwckpS335KVmKEP8BFAcJnsGSGWV5f"),
     collectionAuthorityRecord,
   ]);
 };
