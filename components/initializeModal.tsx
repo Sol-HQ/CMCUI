@@ -18,7 +18,6 @@ import {
   CandyGuard,
   CandyMachine,
   getMerkleRoot,
-  wrap,
   route,
 } from "@metaplex-foundation/mpl-core-candy-machine";
 import {
@@ -60,11 +59,7 @@ const createLut =
       builder = builder.setBlockhash(latestBlockhash);
 
       builder = builder.prepend(
-        setComputeUnitPrice(umi, {
-          microLamports: parseInt(
-            process.env.NEXT_PUBLIC_MICROLAMPORTS ?? "1001"
-          ),
-        })
+        setComputeUnitPrice(umi, { microLamports: parseInt(process.env.NEXT_PUBLIC_MICROLAMPORTS ?? "1001") })
       );
       const requiredCu = await getRequiredCU(umi, builder.build(umi));
       builder = builder.prepend(
@@ -130,11 +125,7 @@ const initializeGuards =
       }
       if (builder.items.length > 0) {
         builder = builder.prepend(
-          setComputeUnitPrice(umi, {
-            microLamports: parseInt(
-              process.env.NEXT_PUBLIC_MICROLAMPORTS ?? "1001"
-            ),
-          })
+          setComputeUnitPrice(umi, { microLamports: parseInt(process.env.NEXT_PUBLIC_MICROLAMPORTS ?? "1001") })
         );
         const latestBlockhash = (await umi.rpc.getLatestBlockhash()).blockhash;
         builder = builder.setBlockhash(latestBlockhash);
@@ -176,11 +167,7 @@ const buyABeer = (umi: Umi, amount: string) => async () => {
         amount: sol(Number(amount)),
       })
     );
-  builder = builder.prepend(
-    setComputeUnitPrice(umi, {
-      microLamports: parseInt(process.env.NEXT_PUBLIC_MICROLAMPORTS ?? "1001"),
-    })
-  );
+  builder = builder.prepend(setComputeUnitPrice(umi, { microLamports: parseInt(process.env.NEXT_PUBLIC_MICROLAMPORTS ?? "1001") }));
   const latestBlockhash = (await umi.rpc.getLatestBlockhash()).blockhash;
   builder = builder.setBlockhash(latestBlockhash);
   const requiredCu = await getRequiredCU(umi, builder.build(umi));
@@ -194,7 +181,7 @@ const buyABeer = (umi: Umi, amount: string) => async () => {
     });
     createStandaloneToast().toast({
       title: "Thank you! 🍻",
-      description: `Lets have a 🍺 together!`,
+      description: `Lets Fly a Kite together!`,
       status: "success",
       duration: 9000,
       isClosable: true,
@@ -241,87 +228,6 @@ type Props = {
   candyGuard: CandyGuard | undefined;
 };
 
-const createTestCm = (umi: Umi) => async () => {
-  // When we create a new candy machine with config line settings.
-  const candyMachine = generateSigner(umi);
-  const base = generateSigner(umi);
-  const collectionAddress = generateSigner(umi);
-  console.log("candyMachine ", candyMachine.publicKey);
-  console.log("base ", base.publicKey);
-  console.log("collectionAddress ", collectionAddress.publicKey);
-
-  let builder = transactionBuilder()
-/*      .add(
-      createCollectionV1(umi, {
-        collection: collectionAddress,
-        name: "Numbers Core Collection",
-        uri: "fill in",
-      })
-    )  */
-    .add(
-      await createCandyMachine(umi, {
-        candyMachine,
-        collection: publicKey("E5taDLS8Ne5LCdwckpS335KVmKEP8BFAcJnsGSGWV5f"), //collectionAddress.publicKey,
-        collectionUpdateAuthority: umi.identity,
-        itemsAvailable: 0,
-        configLineSettings: some({
-          prefixName: "Degen #",
-          nameLength: 0,
-          prefixUri: "fill in",
-          uriLength: 43,
-          isSequential: false,
-        }),
-      })
-    );
-  await builder.sendAndConfirm(umi, {
-    confirm: { commitment: "finalized" },
-    send: {
-      skipPreflight: true,
-    },
-  });
-  builder = transactionBuilder().add(
-    addConfigLines(umi, {
-      authority: umi.identity,
-      candyMachine: candyMachine.publicKey,
-      index: 0,
-      configLines: [
-        { name: "$ID$", uri: "fill in" },
-      ],
-    })
-  );
-  await builder.sendAndConfirm(umi, {
-    confirm: { commitment: "finalized" },
-    send: {
-      skipPreflight: true,
-    },
-  });
-  builder = transactionBuilder()
-    .add(
-      createCandyGuard(umi, {
-        base,
-        guards: {
-          solFixedFee: some({
-            lamports: sol(0.00005),
-            destination: umi.identity.publicKey,
-          }),
-        },
-      })
-    )
-
-    .add(
-      wrap(umi, {
-        candyMachine: candyMachine.publicKey,
-        candyGuard: findCandyGuardPda(umi, { base: base.publicKey }),
-      })
-    );
-  await builder.sendAndConfirm(umi, {
-    confirm: { commitment: "finalized" },
-    send: {
-      skipPreflight: true,
-    },
-  });
-};
-
 export const InitializeModal = ({ umi, candyMachine, candyGuard }: Props) => {
   const [recentSlot, setRecentSlot] = useState<number>(0);
   const [amount, setAmount] = useState<string>("5");
@@ -336,15 +242,7 @@ export const InitializeModal = ({ umi, candyMachine, candyGuard }: Props) => {
 
   if (!candyGuard) {
     console.error("no guard defined!");
-    return     <>
-      <HStack>
-        <Button onClick={createTestCm(umi)}>create test cm</Button>
-          <Text>
-            Creates a test CM. Logs CM address and Collection Address in the
-            developer console.
-          </Text>
-        </HStack>
-    </>;
+    return <></>;
   }
 
   //key value object with label and roots
@@ -369,6 +267,7 @@ export const InitializeModal = ({ umi, candyMachine, candyGuard }: Props) => {
       </Box>
     );
   });
+
   return (
     <>
       <VStack>
@@ -381,13 +280,6 @@ export const InitializeModal = ({ umi, candyMachine, candyGuard }: Props) => {
           <Text>Reduces transaction size errors</Text>
         </HStack>
         <HStack>
-          <Button onClick={createTestCm(umi)}>create test cm</Button>
-          <Text>
-            Creates a test CM. Logs CM address and Collection Address in the
-            developer console.
-          </Text>
-        </HStack>
-        <HStack>
           <Button onClick={initializeGuards(umi, candyMachine, candyGuard)}>
             Initialize Guards
           </Button>
@@ -395,7 +287,7 @@ export const InitializeModal = ({ umi, candyMachine, candyGuard }: Props) => {
         </HStack>
         <HStack>
           <BuyABeerInput value={amount} setValue={setAmount} />
-          <Button onClick={buyABeer(umi, amount)}>Buy me a Beer 🍻</Button>
+          <Button onClick={buyABeer(umi, amount)}>Buy me a Kite 🍻</Button>
         </HStack>
         {rootElements.length > 0 && (
           <Text fontWeight={"bold"}>Merkle trees for your allowlist.tsx:</Text>
