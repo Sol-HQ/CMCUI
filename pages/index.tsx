@@ -96,7 +96,7 @@ const useCandyMachine = (
         }
       }
     })();
-  }, [umi, checkEligibility]);
+  }, [umi, checkEligibility, candyMachineId, setfirstRun, firstRun, toast]);
 
   return { candyMachine, candyGuard };
 
