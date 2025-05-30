@@ -18,6 +18,7 @@ import {
   CandyGuard,
   CandyMachine,
   getMerkleRoot,
+  wrap,
   route,
 } from "@metaplex-foundation/mpl-core-candy-machine";
 import {
