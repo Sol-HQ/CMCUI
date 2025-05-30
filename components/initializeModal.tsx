@@ -43,8 +43,8 @@ import {
   getMerkleRoot,
   route,
   wrap,
-} from "@metaplex-foundation/mpl-core-candy-machine";
-
+} from "@metaplex-foundation/mpl-core-candy-machine";   use original and old
+ 
 // new function createLUT that is called when the button is clicked and which calls createLutForCandyMachineAndGuard and returns a success toast
 const createLut =
   (
