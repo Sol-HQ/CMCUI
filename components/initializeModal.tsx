@@ -1,4 +1,4 @@
-import { createLutForCandyMachineAndGuard } from "../utils/createLutForCandyGuard";
+import { createLutForCandyMachineAndGuard } from "../utils/createLutForCandyGuard";More actions
 import {
   Box,
   Button,
@@ -15,13 +15,9 @@ import {
   createStandaloneToast,
 } from "@chakra-ui/react";
 import {
-  CandyGuard,
-  CandyMachine,
-  getMerkleRoot,
-  route,
-} from "@metaplex-foundation/mpl-core-candy-machine";
-import {
   Umi,
+  generateSigner,
+  percentAmount,
   publicKey,
   sol,
   some,
@@ -37,6 +33,17 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { allowLists } from "@/allowlist";
 import { getRequiredCU } from "@/utils/mintHelper";
+import {
+  CandyGuard,
+  CandyMachine,
+  addConfigLines,
+  createCandyGuard,
+  createCandyMachine,
+  findCandyGuardPda,
+  getMerkleRoot,
+  route,
+  wrap,
+} from "@metaplex-foundation/mpl-core-candy-machine";
 
 // new function createLUT that is called when the button is clicked and which calls createLutForCandyMachineAndGuard and returns a success toast
 const createLut =
