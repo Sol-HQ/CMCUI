@@ -315,9 +315,9 @@ const Timer = ({
   useEffect(() => {
     const interval = setInterval(() => {
       setRemainingTime((prev) => {
-        return prev - BigInt(1);
+        return prev - BigInt(10);
       });
-    }, 1000);
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 
